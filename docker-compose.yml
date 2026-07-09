@@ -1,22 +1,32 @@
+version: "3.9"
+
 services:
-  backend:
+  app:
     build: .
-    environment:
-        API_PORT: 36000
-        MONGO_URI: mongodb://database:27017/
-        SWAGGER_API: true
-        nginx: false
+    container_name: xenia-web-service
+    restart: unless-stopped
+
     ports:
-      - '36000:36000'
-    volumes:
-    # Optionally mount static content volume for Nginx (cannot access container).
-    # Use ./src/ instead of ./dist/ so we don't have to build on host. 
-    # - './src/public:/xenia-web-service/dist/src/public'
+      - "36001:36000"
+
+    environment:
+      API_PORT: 36000
+      MONGO_URI: mongodb://mongo:27017/xenia
+      SWAGGER_API: "true"
+      nginx: "true"
+
     depends_on:
-      - database
-  database:
-    image: mongo:noble
+      - mongo
+
+  mongo:
+    image: mongo:8
+    container_name: xenia-mongo
+    restart: unless-stopped
     ports:
       - '27018:27017'
+
     volumes:
-      - './data/mongo:/data/db'
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
