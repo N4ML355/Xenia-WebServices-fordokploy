@@ -17,5 +17,6 @@ ENV SWAGGER_API=true
 ENV nginx=true
 
 EXPOSE 36001
+EXPOSE 36000
 
 CMD [ "npm", "start" ]
