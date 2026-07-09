@@ -29,7 +29,7 @@
     "docker:build": "docker build -t xenia-webservices .",
     "docker:run": "docker run --name xenia-webservices -p 36000:36000 xenia-webservices",
     "docker:start": "docker start -a xenia-webservices",
-    "docker:mongo": "docker pull mongo:noble",
+    "docker:mongo": "docker pull mongo",
     "docker:run-mongo": "docker run --name mongo-xenia -p 27018:27017 -v %INIT_CWD%\\data\\mongo:/data/db -d mongo",
     "docker:start-mongo": "docker start -a mongo-xenia",
     "docker:compose": "docker compose up"
